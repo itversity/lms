@@ -1,0 +1,47 @@
+name: Deploy and Run LMS
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+jobs:
+  deploy:
+    name: Deploy LMS
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: copy file via ssh using key
+      uses: appleboy/scp-action@master
+      with:
+        host: ${{ secrets.QA_HOST }}
+        username: ${{ secrets.QA_APP_USER }}
+        key: ${{ secrets.QA_APP_SECRET }}
+        source: "*"
+        target: "/apps/lms"
+        rm: "true"
+  build:
+    needs: deploy
+    name: Build LMS
+    runs-on: ubuntu-latest
+    steps:
+    - name: executing remote ssh commands using password
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.QA_HOST }}
+        username: ${{ secrets.QA_APP_USER }}
+        key: ${{ secrets.QA_APP_SECRET }}
+        script: python3 -m pip install -r /apps/lms/requirements.txt
+  run:
+    needs: build
+    name: Run LMS
+    runs-on: ubuntu-latest
+    steps:
+    - name: executing remote ssh commands using password
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.QA_HOST }}
+        username: ${{ secrets.QA_APP_USER }}
+        key: ${{ secrets.QA_APP_SECRET }}
+        script: |
+          sudo systemctl restart supervisor
+          sudo systemctl restart nginx

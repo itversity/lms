@@ -30,4 +30,4 @@ jobs:
         host: ${{ secrets.QA_HOST }}
         username: ${{ secrets.QA_APP_USER }}
         key: ${{ secrets.QA_APP_SECRET }}
-        script: python3 -m pip install /apps/lms/requirements.txt
+        script: python3 -m pip install -r /apps/lms/requirements.txt

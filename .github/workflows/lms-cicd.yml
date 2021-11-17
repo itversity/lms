@@ -19,3 +19,4 @@ jobs:
         key: ${{ secrets.QA_APP_SECRET }}
         source: "lms/"
         target: "/apps/"
+        rm: "true"

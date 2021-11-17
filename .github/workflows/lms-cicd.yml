@@ -1,5 +1,7 @@
 name: Deploy and Run LMS
 on:
+  push:
+    branches: [ main ]
   pull_request:
     branches: [ main ]
 jobs:
@@ -17,3 +19,4 @@ jobs:
         key: ${{ secrets.QA_APP_SECRET }}
         source: "lms/"
         target: "/apps/"
+        rm: "true"

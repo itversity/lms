@@ -1,4 +1,4 @@
-name: scp files
+name: Deploy and Run LMS
 on:
   pull_request:
     branches:

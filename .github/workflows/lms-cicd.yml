@@ -1,0 +1,20 @@
+name: scp files
+on:
+  pull_request:
+    branches:
+      - main
+jobs:
+
+  deploy:
+    name: Deploy LMS
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: copy file via ssh using key
+      uses: appleboy/scp-action@master
+      with:
+        host: ${{ secrets.QA_HOST }}
+        username: ${{ secrets.QA_APP_USER }}
+        key: ${{ secrets.QA_APP_SECRET }}
+        source: "lms"
+        target: "/apps"

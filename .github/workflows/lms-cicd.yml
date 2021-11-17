@@ -17,5 +17,5 @@ jobs:
         username: ${{ secrets.QA_APP_USER }}
         key: ${{ secrets.QA_APP_SECRET }}
         source: "."
-        target: "/apps/"
+        target: "/apps/lms"
         rm: "true"

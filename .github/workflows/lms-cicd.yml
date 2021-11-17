@@ -1,5 +1,7 @@
 name: Deploy and Run LMS
 on:
+  push:
+    branches: [ main ]
   pull_request:
     branches: [ main ]
 jobs:

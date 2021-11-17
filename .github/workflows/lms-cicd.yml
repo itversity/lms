@@ -9,6 +9,7 @@ jobs:
     name: Deploy LMS
     runs-on: ubuntu-latest
     steps:
+    - users: actions/checkout@v2
     - name: copy file via ssh using key
       uses: appleboy/scp-action@master
       with:

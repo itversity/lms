@@ -16,5 +16,5 @@ jobs:
         host: ${{ secrets.QA_HOST }}
         username: ${{ secrets.QA_APP_USER }}
         key: ${{ secrets.QA_APP_SECRET }}
-        source: "lms"
-        target: "/apps"
+        source: "lms/"
+        target: "/apps/"
